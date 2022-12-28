@@ -91,6 +91,41 @@ public class GraphImpl implements Graph {
         return edgeAmount;  //Dummy return value.  Remove when you implement!
     }
 
+    @Override
+    public Stack<String> topoSort() {
+        int sizeOfGraph = nodes.size();
+        Stack<String> sortedStack = new Stack<String>();
+        List<String> zeroKeys = new ArrayList<>();
+        int visitedNodes = 0;
+
+        for (String key : nodes.keySet()) {
+            if (nodes.get(key).getInDegree() == 0) {
+                zeroKeys.add(key);
+            }
+        }
+
+        while (zeroKeys.size() != 0){
+            for (int i = 0; i < zeroKeys.size(); i++){
+                deleteNode(nodes.get(zeroKeys.get(i)).getName());
+                sortedStack.add(zeroKeys.get(i));
+                visitedNodes += 1;
+            }
+            zeroKeys.clear();
+            for (String key : nodes.keySet()) {
+                if (nodes.get(key).getInDegree() == 0) {
+                    zeroKeys.add(key);
+                }
+            }
+        }
+
+        if (visitedNodes == sizeOfGraph){
+            return sortedStack;
+        }
+        else {
+            sortedStack = new Stack<>();
+            return sortedStack;
+        }
+    }
 
     @Override
     public Map<String, Double> dijkstra(String start) {
