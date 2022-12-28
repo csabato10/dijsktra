@@ -50,7 +50,18 @@ public interface Graph {
      * @return - integer 0 or greater that is the number of edges in the graph
      */
     int numEdges();
-
+    
+    /**
+     * Runs the topological sort algorithm on the graph.
+     * Since there can be multiple topo sorts in a graph,
+     * any valid topo will suffice for this method.
+     * If there is no valid topo sort (cyclic graph), return an empty stack.
+     *
+     *
+     * @return Stack of string elements representing the topological sort in order.
+     */
+    Stack<String> topoSort();
+    
     /**
      * Runs Dijkstra's algorithm on the graph, starting at the node specified by the start parameter.
      * Return a map where the key is the name of the node and the value is the distance from the start node.
